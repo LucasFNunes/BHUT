@@ -15,10 +15,14 @@ carQueue.process(async (job) => {
     data_hora_criacao: createdAt,
     data_hora_processamento: new Date(),
   });
+  const apiLink = process.env.API_LINK;
 
   // Enviar webhook
-  await sendWebhook("https://webhook.site/your-webhook-url", {
-    carId,
-    createdAt,
-  });
+  await sendWebhook(
+    `https://webhook.site/86c72498-3495-4fc9-aa6b-6a9e8f569b93`,
+    {
+      carId,
+      createdAt,
+    }
+  );
 });

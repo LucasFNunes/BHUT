@@ -11,6 +11,6 @@
     "moduleResolution": "node",
     "experimentalDecorators": true
   },
-  "include": ["src/**/*", "types.d.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules"] // Exclui a pasta node_modules
 }
