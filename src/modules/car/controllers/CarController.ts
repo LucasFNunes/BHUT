@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import FindAllCarService from "../services/FindAllCarService";
 import CreateCarService from "../services/CreateCarService";
+import FindAllLogsService from "../services/FindAllLogsService";
 
 const CarController = {
-  async findAll(request: Request, response: Response) {
+  async findAllCar(request: Request, response: Response) {
     try {
       const allCar = await FindAllCarService.findAllCar();
 
@@ -19,6 +20,15 @@ const CarController = {
       return response.status(201).json(createdCar);
     } catch (error) {
       response.status(500).json({ error: "Erro ao criar carro" });
+    }
+  },
+  async findAllLogs(request: Request, response: Response) {
+    try {
+      const allLogs = await FindAllLogsService.findAllLogs();
+
+      return response.status(200).json(allLogs);
+    } catch (error: any) {
+      return response.status(500).send({ error: error.message });
     }
   },
 };
