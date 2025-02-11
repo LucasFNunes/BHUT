@@ -5,7 +5,7 @@ import * as fs from "fs";
 import * as yaml from "js-yaml";
 import { createClient } from "redis"; // Usando redis v4
 import redisConfig from "./shared/config/redis";
-
+import "./modules/car/services/QueueProcessor"; // Adicione esta linha
 // Carregar o arquivo Swagger YAML
 const swaggerDocument = yaml.load(
   fs.readFileSync("./swagger.yaml", "utf8")
