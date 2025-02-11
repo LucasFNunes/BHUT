@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  redis:
+    image: redis:latest # Usa a imagem oficial do Redis
+    container_name: redis_container
+    ports:
+      - "6379:6379" # Expõe a porta 6379 do Redis para o host
+    volumes:
+      - redis_data:/data # Persiste os dados do Redis em um volume
+    restart: always # Reinicia o contêiner automaticamente em caso de falha
+
+volumes:
+  redis_data: # Define um volume para persistir os dados do Redis
