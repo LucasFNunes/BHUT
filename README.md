@@ -141,7 +141,7 @@ Resposta:
 
 3. Deletar um carro
 
-    DELETE API_URL/car/
+    DELETE API_URL/car/:id
     Resposta:
 ```
     {
