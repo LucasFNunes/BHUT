@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import FindAllCarService from "../services/FindAllCarService";
 import CreateCarService from "../services/CreateCarService";
 import FindAllLogsService from "../services/FindAllLogsService";
+import DeleteCarService from "../services/DeleteCarService";
 
 const CarController = {
   async findAllCar(request: Request, response: Response) {
@@ -18,6 +19,15 @@ const CarController = {
     try {
       const createdCar = await CreateCarService.create(carData);
       return response.status(201).json(createdCar);
+    } catch (error) {
+      response.status(500).json({ error: "Erro ao criar carro" });
+    }
+  },
+  async delete(request: Request, response: Response) {
+    const { id } = request.params;
+    try {
+      const returned = await DeleteCarService.delete(id);
+      return response.status(201).json({ message: returned });
     } catch (error) {
       response.status(500).json({ error: "Erro ao criar carro" });
     }

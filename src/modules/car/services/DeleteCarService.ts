@@ -3,8 +3,8 @@ import Authentication from "../../../shared/auth/Authentication";
 import dotenv from "dotenv";
 dotenv.config();
 
-export default class FindAllCarService {
-  static async findAllCar(): Promise<any> {
+export default class DeleteCarService {
+  static async delete(id: string): Promise<String> {
     const apiLink = process.env.API_LINK;
 
     const token = await Authentication.execute();
@@ -16,12 +16,12 @@ export default class FindAllCarService {
         },
       };
       try {
-        const response = await axios.get(`${apiLink}/v1/carro`, config); // Faz a requisição POST
+        await axios.delete(`${apiLink}/v1/carro/${id}`, config); // Faz a requisição DELETE
 
-        return response.data;
+        return " Carro deletado com sucesso !";
       } catch (error) {
-        console.error("Erro ao tentar buscar carros:", error);
-        throw new Error("Erro ao buscar carros.");
+        console.error("Erro ao tentar deletar carro:", error);
+        throw new Error("Erro ao deletar carro.");
       }
     } else {
       throw new Error("Erro ao realizar o login.");

@@ -10,6 +10,8 @@ routesCar.post("/car", CarController.create as typeof requestHandler);
 
 routesCar.get("/car", CarController.findAllCar as typeof requestHandler);
 
+routesCar.delete("/car/:id", CarController.delete as typeof requestHandler);
+
 routesCar.get("/logs", CarController.findAllLogs as typeof requestHandler);
 
 export default routesCar;
