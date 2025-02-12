@@ -10,8 +10,10 @@ const CarController = {
       const allCar = await FindAllCarService.findAllCar();
 
       return response.status(200).json(allCar);
-    } catch (error: any) {
-      return response.status(500).send({ error: error.message });
+    } catch (error) {
+      return response
+        .status(500)
+        .send({ error: "Erro ao tentar encontrar os carros" });
     }
   },
   async create(request: Request, response: Response) {
@@ -29,7 +31,7 @@ const CarController = {
       const returned = await DeleteCarService.delete(id);
       return response.status(201).json({ message: returned });
     } catch (error) {
-      response.status(500).json({ error: "Erro ao criar carro" });
+      response.status(500).json({ error: "Erro ao deletar carro" });
     }
   },
   async findAllLogs(request: Request, response: Response) {
@@ -37,8 +39,10 @@ const CarController = {
       const allLogs = await FindAllLogsService.findAllLogs();
 
       return response.status(200).json(allLogs);
-    } catch (error: any) {
-      return response.status(500).send({ error: error.message });
+    } catch (error) {
+      return response
+        .status(500)
+        .send({ error: "Erro ao tentar encontrar os logs" });
     }
   },
 };
