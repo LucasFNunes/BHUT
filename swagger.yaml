@@ -1,9 +1,217 @@
 openapi: 3.0.0
 info:
-  title: BHUB prova
+  title: BHUB
   version: 1.0.0
 servers:
   - url: http://localhost:3000
     description: Servidor local
 
 paths:
+  /api/car/:
+    get:
+      summary: Listar Carros
+      description: Retorna todas os Carros.
+      tags:
+        - Car
+      responses:
+        200:
+          description: Lista de carros retornada com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paginacao:
+                    type: object
+                    properties:
+                      pagina:
+                        type: integer
+                        example: 1
+                      tamanhoPagina:
+                        type: integer
+                        example: 500
+                      total:
+                        type: integer
+                        example: 5
+                  itens:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                          example: "380b4c27-232b-4f70-a6f5-a705392e29f6"
+                        nome:
+                          type: string
+                          example: "Etios"
+                        marca:
+                          type: string
+                          example: "Toyota"
+                        preco:
+                          type: number
+                          format: float
+                          example: 49999.99
+                        anoFabricacao:
+                          type: integer
+                          example: 2014
+                        ativo:
+                          type: boolean
+                          example: true
+                        criadoEm:
+                          type: string
+                          format: date-time
+                          example: "2025-02-11 16:45:12"
+                        atualizadoEm:
+                          type: string
+                          format: date-time
+                          nullable: true
+                          example: null
+
+        500:
+          description: Erro ao tentar retornar carros.
+
+    post:
+      summary: Criar Carro
+      description: Cria o Carro.
+      tags:
+        - Car
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                  example: "Etios"
+                marca:
+                  type: string
+                  example: "Toyota"
+                preco:
+                  type: float
+                  example: 49999.99
+                anoFabricacao:
+                  type: integer
+                  example: 2012
+
+      responses:
+        201:
+          description: Carro criado com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "AAAAAAAAAAA-AAAA-AAA-AAAAAAAAAA"
+
+        500:
+          description: Erro ao tentar criar Carro.
+
+  /api/car/:id:
+    delete:
+      summary: Deletar Carro
+      description: Deleta o carro que teve o seu ID passado.
+      tags:
+        - Car
+      responses:
+        200:
+          description: Deleta Carro.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Carro deletado com sucesso !"
+        500:
+          description: "Erro ao tentar deletar carro"
+
+  /api/logs/:
+    get:
+      summary: Listar Logs
+      description: Retorna todas os Logs.
+      tags:
+        - Logs
+      responses:
+        200:
+          description: Lista de Logs retornada com sucesso.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "5"
+                    car_id:
+                      type: string
+                      format: uuid
+                      example: "861565ca-cbde-4da7-8804-79c2088652fb"
+                    data_hora_criacao:
+                      type: string
+                      format: date-time
+                      example: "2025-02-12T12:51:51.561Z"
+                    data_hora_processamento:
+                      type: string
+                      format: date-time
+                      example: "2025-02-12T12:51:51.602Z"
+
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        paginacao:
+                          type: object
+                          properties:
+                            pagina:
+                              type: integer
+                              example: 1
+                            tamanhoPagina:
+                              type: integer
+                              example: 500
+                            total:
+                              type: integer
+                              example: 5
+                        itens:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                format: uuid
+                                example: "380b4c27-232b-4f70-a6f5-a705392e29f6"
+                              nome:
+                                type: string
+                                example: "Etios"
+                              marca:
+                                type: string
+                                example: "Toyota"
+                              preco:
+                                type: number
+                                format: float
+                                example: 49999.99
+                              anoFabricacao:
+                                type: integer
+                                example: 2014
+                              ativo:
+                                type: boolean
+                                example: true
+                              criadoEm:
+                                type: string
+                                format: date-time
+                                example: "2025-02-11 16:45:12"
+                              atualizadoEm:
+                                type: string
+                                format: date-time
+                                nullable: true
+                                example: null
+        500:
+          description: "Erro ao tentar encontrar os logs."
